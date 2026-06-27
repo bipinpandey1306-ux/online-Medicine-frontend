@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Krishna Pharmacy"
+version = "1.0.0"
+id = "artifacts/krishna-pharmacy"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19379
+
+[services.development]
+run = "pnpm --filter @workspace/krishna-pharmacy run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/krishna-pharmacy", "run", "build" ]
+publicDir = "artifacts/krishna-pharmacy/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19379"
+BASE_PATH = "/"
